@@ -50,9 +50,9 @@ class Steganography:
             self.setting.has_path_label = False
     
     def open_image(self):
-        image = Image.open(self.image_path)
-        image.resize((self.setting.max_image_width, self.setting.max_image_height))
-        self.image_label = tk.Label(img = image,border="black").pack()
+        self.app_image = ImageTk.PhotoImage(file=self.image_path)
+        self.image_label = tk.Label(self.window, image=self.app_image).pack()
+
 
         
 
