@@ -7,6 +7,9 @@ class Setting():
         self.icon = "assets/hackingicon.ico"
         self.title = "Steganography Encrypter"
         self.title_font_size = 20
+        self.has_path_label = False
+        self.max_image_width = 200
+        self.max_image_height = 200
         
 
     
