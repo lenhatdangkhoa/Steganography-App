@@ -12,10 +12,9 @@ class Steganography:
         self.window.geometry(f"{self.setting.width}x{self.setting.height}")
         self.window.iconbitmap(self.setting.icon)
         self.window.title(self.setting.title)
-        # Try canvas to set the background image https://www.tutorialspoint.com/how-to-use-an-image-for-the-background-in-tkinter
-        self.background_image = tk.PhotoImage(self.setting.background_image)
-        self.window_background = tk.Label(self.window, image=self.background_image)
-        self.window_background.place(x=0,y=0,relheight=1,relwidth=1)
+        self.background_image = tk.PhotoImage(file=self.setting.background_image)
+        self.background_image_label = tk.Label(self.window, background="black", image=self.background_image)
+        self.background_image_label.place(x=0,y=0)
         self.define_app_content()
 
 
@@ -61,6 +60,11 @@ class Steganography:
         self.app_image.height = self.setting.max_image_height
         self.app_image.width = self.setting.max_image_width
         self.image_label = tk.Label(self.window,image=self.app_image).place(x=0,y=100)
+        self.get_user_input()
+
+    def get_user_input(self):
+        self.text_box = tk.Text(self.window, width=50, height=10)
+        self.text_box.place(x=500,y=125)
 
 
 

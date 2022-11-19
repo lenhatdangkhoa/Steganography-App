@@ -6,7 +6,7 @@ class Setting():
     def __init__(self):
         self.width = 1000
         self.height = 750
-        self.background_image = "assets/background.jpg"
+        self.background_image = "assets/edited_background.png"
         self.icon = "assets/hackingicon.ico"
         self.title = "Steganography Encryption"
         self.title_font_size = 20
