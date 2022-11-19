@@ -12,6 +12,10 @@ class Steganography:
         self.window.geometry(f"{self.setting.width}x{self.setting.height}")
         self.window.iconbitmap(self.setting.icon)
         self.window.title(self.setting.title)
+        # Try canvas to set the background image https://www.tutorialspoint.com/how-to-use-an-image-for-the-background-in-tkinter
+        self.background_image = tk.PhotoImage(self.setting.background_image)
+        self.window_background = tk.Label(self.window, image=self.background_image)
+        self.window_background.place(x=0,y=0,relheight=1,relwidth=1)
         self.define_app_content()
 
 
