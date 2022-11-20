@@ -9,6 +9,7 @@ class Setting():
         self.background_image = "assets/edited_background.png"
         self.icon = "assets/hackingicon.ico"
         self.title = "Steganography Encryption"
+        self.button_image = "assets/push.png"
         self.title_font_size = 20
         self.has_path_label = False
         self.max_image_width = 200
