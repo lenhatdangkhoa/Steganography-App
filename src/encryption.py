@@ -1,8 +1,6 @@
 import tkinter as tk
 from settings import *
 from PIL import ImageTk, Image
-from tkinter import filedialog as fd
-import cv2
 
 def encrypt(filepath, secret_message):
     image = Image.open(filepath)
@@ -63,13 +61,6 @@ def encrypt(filepath, secret_message):
                     b = int("".join(b), 2)
                     image.putpixel((x,y), (r,g,b))
                     iteration += 3
-            """
-            encrypted_bin = ""
-            for x in range(image.width):
-                for y in range(image.height):
-                    r,g,b = image.getpixel((x,y))
-                    encrypted_bin += bin(r)[-1] + bin(g)[-1] + bin(b)[-1]
-            """
         else:
             iteration = 0
             for x in range(image.width):
@@ -96,21 +87,6 @@ def encrypt(filepath, secret_message):
                     image.putpixel((x,y), (r,g,b,a))
                     iteration += 4
 
-
-        """
-            encrypted_bin = ""
-            for x in range(image.width):
-                for y in range(image.height):
-                    r,g,b,a = image.getpixel((x,y))
-                    encrypted_bin += bin(r)[-1] + bin(g)[-1] + bin(b)[-1] + bin(a)[-1]
-        decoded_message = ""
-        for i in range(0,len(encrypted_bin),8):
-            decoded_message += chr(int(encrypted_bin[i:i+8], 2))
-            if len(decoded_message) >= 5 and decoded_message[-5:] == "$t3g0":
-                break
-        decoded_message = decoded_message[0:len(decoded_message) - 5]
-        print(decoded_message)
-"""
     return image
 def decrypt(filepath):
     image = Image.open(filepath)

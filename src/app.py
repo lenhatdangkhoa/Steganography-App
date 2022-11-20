@@ -4,7 +4,6 @@ from PIL import ImageTk, Image
 from tkinter import filedialog as fd
 from encryption import *
 
-
 class Steganography:      
     def __init__(self):
         self.setting = Setting()
@@ -29,14 +28,21 @@ class Steganography:
         self.encrypt_button_image = ImageTk.PhotoImage(self.encrypt_button_image)
         self.decrypt_button_image = Image.open(self.setting.decrypt_image).resize((30,35))
         self.decrypt_button_image = ImageTk.PhotoImage(self.decrypt_button_image)
-        self.padlock_green = tk.Button(self.window, width = 30, height = 35, background="black", borderwidth=0, image = self.encrypt_button_image, activebackground="black")
+        self.padlock_green = tk.Button(self.window, width = 30, height = 35, background="black", borderwidth=0, image = self.encrypt_button_image, activebackground="black", command =)
         self.padlock_green.place(x=750,y=25)
         self.padlock_red = tk.Button(self.window, width = 65, height = 35, background="black", borderwidth=0, image = self.decrypt_button_image, activebackground="black")
         self.padlock_red.place(x=685,y=25)
         self.button = tk.Button(self.window, text="Open", width = 60, height=60, background="black", borderwidth=0, image=self.button_image, command=self.open_image)
         self.button.place(x=850,y = 15)
-        self.padlock_red.bind("<Enter>")
+        #self.padlock_red.bind("<Enter>")
+        self.mode_text = "Active: Encryption Mode"
+        self.mode_label = tk.Label(self.window, text=self.mode_text, foreground="green", background="black")
+        self.mode_label.place(x=675,y=70)
 
+    def change_mode(self):
+        if self.setting.toggle_on:
+            self.mode_text = "Active: Encryption Mode"
+              
     def run(self):
         self.window.mainloop()
 
