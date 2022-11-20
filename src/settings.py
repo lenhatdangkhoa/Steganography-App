@@ -16,7 +16,7 @@ class Setting():
         self.has_path_label = False
         self.max_image_width = 200
         self.max_image_height = 200
-        self.toggle_on = True
+        self.encrypt_mode = True
         
         
 
