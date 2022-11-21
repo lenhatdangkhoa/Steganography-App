@@ -34,7 +34,6 @@ class Steganography:
         self.padlock_red.place(x=685,y=25)
         self.button = tk.Button(self.window, text="Open", width = 60, height=60, background="black", borderwidth=0, image=self.button_image, command=self.open_image)
         self.button.place(x=850,y = 15)
-        #self.padlock_red.bind("<Enter>")
         self.mode_text = "Active: Encryption Mode"
         self.mode_label = tk.Label(self.window, text=self.mode_text, foreground="red", background="black")
         self.mode_label.place(x=675,y=70)
@@ -68,7 +67,10 @@ class Steganography:
     # Get file path from the user <3
     def open_image_path(self):
         self.image_path = fd.askopenfilename()
-        prompt_label = tk.Label(self.window, text="Enter text to be encrypted",width= 58, background="white")
+        if self.setting.encrypt_mode:
+            prompt_label = tk.Label(self.window, text="Enter text to be encrypted",width= 58, background="white")
+        else:
+            prompt_label = tk.Label(self.window, text="Extracted information of the image",width= 58, background="white")
         prompt_label.place(x=500,y=100)
         if (not self.setting.has_path_label):
             self.path_label = tk.Label(text=self.image_path,background="black", foreground="white")
@@ -83,17 +85,24 @@ class Steganography:
     
     def open_image(self):
         self.image_path = self.open_image_path()
-        self.app_image = Image.open(self.image_path).resize((250,250))
+        self.app_image = Image.open(self.image_path).resize((450,450))
         self.app_image = ImageTk.PhotoImage(self.app_image)
         self.image_label = tk.Label(self.window,image=self.app_image)
-        self.image_label.config(highlightbackground="gray", highlightcolor="grey", highlightthickness=4)
+        self.image_label.config(highlightbackground="gray", highlightcolor="gray", highlightthickness=4)
         self.image_label.place(x=0,y=100)
-        self.encrypt_button = tk.Button(self.window, text="Encrypt", background="white", width=58, height=2, command=self.encrypt_image)
-        self.encrypt_button.place(x=500,y=305)
-        self.get_user_input()
+        self.text_label = tk.Text(self.window, width=51, height=20, wrap=tk.WORD)
+        self.text_label.config(state="disabled")
+        if self.setting.encrypt_mode == True:
+            self.encrypt_button = tk.Button(self.window, text="Encrypt", background="red", width=58, height=2, command=self.encrypt_image)
+            self.encrypt_button.place(x=500,y=455)
+            self.get_user_input()
+        else:
+            self.text_label.place(x=500,y=125)
+            self.encrypt_button = tk.Button(self.window, text="Decrypt", background="green", width=58, height=2, command=self.decrypt_image)
+            self.encrypt_button.place(x=500,y=455)
 
     def get_user_input(self):
-        self.text_box = tk.Text(self.window, width=51, height=10)
+        self.text_box = tk.Text(self.window, width=51, height=20)
         self.text_box.place(x=500,y=125)
 
     def encrypt_image(self):
@@ -105,6 +114,15 @@ class Steganography:
             print("An error has occured when saving the image")
             return
         image_to_save.save(filename.name)
+
+    def decrypt_image(self):
+        message = decrypt(self.image_path)
+        self.text_label.destroy()
+        self.text_label = tk.Text(self.window, width=51, height=20, wrap=tk.WORD)
+        self.text_label.insert(tk.INSERT, message)
+        self.text_label.config(state="disabled")
+        self.text_label.place(x=500,y=125)
+
 
         
 

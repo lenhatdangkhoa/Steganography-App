@@ -103,10 +103,15 @@ def decrypt(filepath):
                 r,g,b,a = image.getpixel((x,y))
                 encrypted_bin += bin(r)[-1] + bin(g)[-1] + bin(b)[-1] + bin(a)[-1]
     decoded_message = ""
+    has_stego = False
     for i in range(0,len(encrypted_bin),8):
         decoded_message += chr(int(encrypted_bin[i:i+8], 2))
         if len(decoded_message) >= 5 and decoded_message[-5:] == "$t3g0":
+            has_stego = True
             break
-    decoded_message = decoded_message[0:len(decoded_message) - 5]
-    print(decoded_message)
+    if has_stego:
+        decoded_message = decoded_message[0:len(decoded_message) - 5]
+        return decoded_message
+    else:
+        return decoded_message[0:200]
 
