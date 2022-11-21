@@ -4,7 +4,8 @@ from PIL import ImageTk, Image
 from tkinter import filedialog as fd
 from encryption import *
 
-class Steganography:      
+class Steganography:   
+       
     def __init__(self):
         self.setting = Setting()
         self.window = tk.Tk()
@@ -97,6 +98,7 @@ class Steganography:
             self.encrypt_button.place(x=500,y=455)
             self.get_user_input()
         else:
+            self.bit_text_box.destroy()
             self.text_label.place(x=500,y=125)
             self.encrypt_button = tk.Button(self.window, text="Decrypt", background="green", width=58, height=2, command=self.decrypt_image)
             self.encrypt_button.place(x=500,y=455)
@@ -104,6 +106,8 @@ class Steganography:
     def get_user_input(self):
         self.text_box = tk.Text(self.window, width=51, height=20)
         self.text_box.place(x=500,y=125)
+        self.bit_text_box = tk.Text(self.window, width=5, height=2)
+        self.bit_text_box.place(x=930,y=125)
 
     def encrypt_image(self):
         message = self.text_box.get(1.0,"end-1c")

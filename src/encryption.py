@@ -113,5 +113,5 @@ def decrypt(filepath):
         decoded_message = decoded_message[0:len(decoded_message) - 5]
         return decoded_message
     else:
-        return decoded_message[0:200]
+        return decoded_message[0:250]
 
